@@ -1,5 +1,4 @@
-FROM ubuntu:16.04
-MAINTAINER Vladimir Fesik <xeon@forever.org.ua>
+FROM python:3.7.7-slim-buster
 
 
 ENV ORACLE_HOME /opt/oracle/instantclient_12_1
@@ -12,7 +11,7 @@ RUN \
 	mkdir -p /opt/oracle && \
 	unzip "/tmp/instantclient*.zip" -d /opt/oracle && \
 	ln -s $ORACLE_HOME/libclntsh.so.12.1 $ORACLE_HOME/libclntsh.so && \
-    ln -s /usr/bin/pip3 /usr/bin/pip && \
-	pip install cx_Oracle && \
-    pip install --upgrade pip
+	&& rm -rf /var/lib/apt/lists/*
+	pip install --no-cache-dir cx_Oracle
+	
 
